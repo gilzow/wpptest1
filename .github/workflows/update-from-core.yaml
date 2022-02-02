@@ -25,8 +25,10 @@ jobs:
             - id: check-status
               run: |
                   updates=$(git log main..wpcore/main --oneline)
-                  echo "::notice::Available updates are ${updates}"
                   if [[ -n "${updates}" ]]; then
                     echo "::notice::Updates are available"
-                    git pull wpcore main --no-rebase
+                    git pull wpcore main --no-rebase --no-edit
+                    git push origin main
+                  else
+                    echo "::notice::No updates right now."
                   fi
