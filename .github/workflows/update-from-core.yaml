@@ -28,5 +28,5 @@ jobs:
                   echo "::notice::Available updates are ${updates}"
                   if [[ -n "${updates}" ]]; then
                     echo "::notice::Updates are available"
-                    git pull wpcore main
+                    git pull wpcore main --no-rebase
                   fi
