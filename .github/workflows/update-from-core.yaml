@@ -14,6 +14,8 @@ jobs:
                   fetch-depth: 0
             - id: add-git-remote
               run: |
+                  #which branch are we on? should be main
+                  git branch -a
                   git remote add wpcore https://github.com/gilzow/wpptest2.git
                   git remote -v
                   #git remote update
@@ -24,3 +26,7 @@ jobs:
               run: |
                   updates=$(git log main..wpcore/main --oneline)
                   echo "::notice::Available updates are ${updates}"
+                  if [[ -n "${updates}" ]]; then
+                    echo "::notice::Updates are available"
+                    git pull wpcore main
+                  fi
