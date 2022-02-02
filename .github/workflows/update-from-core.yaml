@@ -23,10 +23,16 @@ jobs:
               run: |
                   git remote update
             - id: check-status
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+                  GIT_EMAIL: ${{ secrets.GIT_EMAIL }}
+                  GIT_USER: ${{ secrets.GIT_USER }}
               run: |
                   updates=$(git log main..wpcore/main --oneline)
                   if [[ -n "${updates}" ]]; then
                     echo "::notice::Updates are available"
+                    git config --global user.email "$GIT_EMAIL"
+                    git config --global user.name "$GIT_USER"
                     git pull wpcore main --no-rebase --no-edit
                     git push origin main
                   else
