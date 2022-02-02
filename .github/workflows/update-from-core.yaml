@@ -10,6 +10,8 @@ jobs:
         name: "Update with WP Core"
         steps:
             - uses: actions/checkout@v2
+              with:
+                  fetch-depth: 0
             - id: add-git-remote
               run: |
                   git remote add wpcore https://github.com/gilzow/wpptest2.git
