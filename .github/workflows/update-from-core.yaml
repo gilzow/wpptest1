@@ -1,0 +1,24 @@
+name: Syncs trunk with wordpress core trunk
+on:
+    schedule:
+        # Run at every 15 minutes
+        - cron: '*/15 * * * *'
+    workflow_dispatch:
+jobs:
+    update-with-wp-core:
+        runs-on: ubuntu-latest
+        name: "Update with WP Core"
+        steps:
+            - uses: actions/checkout@v2
+            - id: add-git-remote
+              run: |
+                  git remote add wpcore git@github.com:gilzow/wpptest2.git
+                  git remote -v
+                  #git remote update
+            - id: remote-update
+              run: |
+                  git remote update
+            - id: check-status
+              run: |
+                  updates=$(git log main..wpcore/main --oneline)
+                  echo "::notice::Available updates are ${updates}"
