@@ -24,7 +24,7 @@ jobs:
                   git remote update
             - id: check-status
               env:
-                  GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+                  #GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
                   GIT_EMAIL: ${{ secrets.GH_EMAIL }}
                   GIT_USER: ${{ secrets.GH_USER }}
               run: |
@@ -35,6 +35,7 @@ jobs:
                     git config --global user.name "$GIT_USER"
                     git pull wpcore main --no-rebase --no-edit
                     git push origin main
+                    echo "::notice::Main updated from wptest2 main"
                   else
                     echo "::notice::No updates right now."
                   fi
