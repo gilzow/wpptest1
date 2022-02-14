@@ -14,14 +14,18 @@ jobs:
                   fetch-depth: 0
             - id: add-git-remote
               run: |
+                  prs=$(gh pr list)
+                  printf "The list of pull requests:\n%s\n" "${prs}"
                   #which branch are we on? should be main
-                  git branch -a
-                  git remote add wpcore https://github.com/gilzow/wpptest2.git
-                  git remote -v
+                  #git branch -a
+                  #git remote add wpcore https://github.com/gilzow/wpptest2.git
+                  #git remote -v
                   #git remote update
             - id: remote-update
               run: |
-                  git remote update
+                  prs=$(gh pr status)
+                  printf "Current status of pull requests:\n%s\n" "${prs}"
+                  #git remote update
             - id: check-status
               env:
                   #GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
