@@ -13,6 +13,8 @@ jobs:
               with:
                   fetch-depth: 0
             - id: add-git-remote
+              env:
+                GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
               run: |
                   prs=$(gh pr list)
                   printf "The list of pull requests:\n%s\n" "${prs}"
@@ -22,6 +24,8 @@ jobs:
                   #git remote -v
                   #git remote update
             - id: remote-update
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
               run: |
                   prs=$(gh pr status)
                   printf "Current status of pull requests:\n%s\n" "${prs}"
