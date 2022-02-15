@@ -2,7 +2,7 @@ name: Syncs trunk with wordpress core trunk
 on:
     schedule:
         # Run at every 15 minutes
-        - cron: '*/15 * * * *'
+        - cron: '* 15 * * *'
     workflow_dispatch:
 jobs:
     update-with-wp-core:
